@@ -1,0 +1,8 @@
+# Ignore the image folder
+images/
+
+# Ignore firebase variables
+config.js
+
+# Ignore the qanda.json file
+qanda.json 

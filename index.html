@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');</style>
+    <title>80's Trivia</title>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h1>80's Trivia</h1>
+        <div id="question-card">
+            <p id="question"></p>
+            <span id="timer" class="timer"></span>
+            <div id="answer-options">
+                <div class="answer-option" data-option="A">
+                    <span class="option-label"></span>
+                    <span class="option-text"></span>
+                </div>
+                <div class="answer-option" data-option="B">
+                    <span class="option-label"></span>
+                    <span class="option-text"></span>
+                </div>
+                <div class="answer-option" data-option="C">
+                    <span class="option-label"></span>
+                    <span class="option-text"></span>
+                </div>
+            </div>
+            <button id="submit-answer">Next Question</button>
+            <p class="score-wrapper">Your score: <span id="current-score">0</span></p>
+        </div>
+        <div id="game-over" class="game-over" hidden>
+            <h2>GAME OVER</h2>
+            <p>Your score: <span id="score"></span></p>
+            <div id="leaderboard">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-content">
+                        <!-- Leaderboard data will be added here -->
+                    </tbody>
+                </table>
+                <div class="buttons-container">
+                    <button id="try-again" class="custom-button">Try Again</button>
+
+                </div>
+            </div>
+        </div>    
+        <div class="start-game" id="start-game">
+            <h2>Welcome to 80's Trivia!</h2>
+            <p>
+            Answer the questions as quickly as possible to score points. <br /><br />You have 15 seconds to answer each question. <br /><br /> This game GREATLY REWARDS speed. The faster you answer, the more points you get. Good luck!
+            </p>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Email" required />
+            <button id="start-game-btn" disabled class="custom-button">Start Game</button>
+        </div>
+    </div>
+</div>
+<!-- Firebase App -->
+<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js" type="module"></script>
+<!-- Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js" type="module"></script>
+<!-- Your app.js file -->
+<script type="module" src="app.js"></script>
+</body>
+</html>
