@@ -21,7 +21,7 @@ const db = getFirestore(app);
 // Select DOM elements
 const submitAnswerBtn = document.getElementById('submit-answer');
 const startGamePopup = document.querySelector('.start-game');
-const emailInput = document.getElementById('email');
+const nameInput = document.getElementById('Name');
 const startGameBtn = document.getElementById('start-game-btn');
 const questionText = document.getElementById("question");
 const answerOptions = document.querySelectorAll(".answer-option");
@@ -34,10 +34,10 @@ let shuffledQuestions = [];
 // initial score
 let score = 0;
 
-// initial email
-let userEmail = "";
+// initial name
+let userName = "";
 
-// User email global variable
+// User name global variable
 let correctAnswers = 0;
 
 // Questions Per Game
@@ -260,13 +260,9 @@ function endGame() {
 
   // const averageTime = calculateAverageTime();
   console.log(timeToAnswerList);
+  const name = nameInput.value;
 
-  // Add this line to print the average time to answer on the console
-
-  const emailInput = document.getElementById('email');
-  const email = emailInput.value; // Get the email string
-
-  saveScore(email, score); // Pass the email string instead of the email input element
+  saveScore(name, score); // Pass the name string instead of the name input element
 }
 
 // Function to load the next question from the shuffled list of questions
@@ -369,9 +365,9 @@ function startCountdown() {
 // Show the start-game popup on page load
 startGamePopup.classList.remove('hidden');
 
-// Validate the email input and enable/disable the start-game button
-emailInput.addEventListener('input', () => {
-  if (emailInput.checkValidity()) {
+// Validate the name input and enable/disable the start-game button
+nameInput.addEventListener('input', () => {
+  if (nameInput) {
     startGameBtn.removeAttribute('disabled');
   } else {
     startGameBtn.setAttribute('disabled', '');
@@ -384,22 +380,22 @@ document.addEventListener("click", (event) => {
   }
 });
 
-async function saveScore(userEmail, score) {
+async function saveScore(userName, score) {
   const q = query(
     collection(db, "leaderboard"),
-    where("email", "==", userEmail)
+    where("name", "==", userName)
   );
   const querySnapshot = await getDocs(q);
 
   if (querySnapshot.empty) {
-    // No matching email found, add a new entry
+    // No matching name found, add a new entry
     await addDoc(collection(db, "leaderboard"), {
-      email: userEmail,
+      name: userName,
       score: Math.floor(score),
       correct_answers: correctAnswers
     });
   } else {
-    // Email found, check if the new score is higher
+    // Name found, check if the new score is higher
     querySnapshot.forEach(async (doc) => {
       if (doc.data().score < score) {
         // Update the score with the new higher score
@@ -430,7 +426,7 @@ async function displayLeaderboard() {
   querySnapshot.forEach((doc) => {
     const data = doc.data();
     const row = document.createElement("tr");
-    const username = data.email.split("@")[0];
+    const username = data.name;
     row.innerHTML = `
       <td>${rank}</td>
       <td>${username}</td>
@@ -442,6 +438,6 @@ async function displayLeaderboard() {
 }
 
 document.getElementById("try-again").addEventListener("click", () => {
-  // Start a new game with the same email
+  // Start a new game with the same name
   startGame();
 });

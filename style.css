@@ -20,7 +20,7 @@ body {
   padding: 2rem;
 }
 
-input[type="email"] {
+input[type="name"] {
   display: block;
   width: 100%;
   max-width: 300px;
